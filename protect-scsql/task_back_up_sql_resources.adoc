@@ -1,0 +1,260 @@
+---
+permalink: protect-scsql/task_back_up_sql_resources.html 
+sidebar: sidebar 
+keywords: backup 
+summary: 'Si une ressource ne fait pas encore partie d"un groupe de ressources, vous pouvez sauvegarder la ressource à partir de la page Ressources.' 
+---
+= Sauvegarde des ressources SQL
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si une ressource ne fait pas encore partie d'un groupe de ressources, vous pouvez sauvegarder la ressource à partir de la page Ressources.
+
+.Description de la tâche
+* Pour l'authentification des informations d'identification Windows, vous devez configurer vos informations d'identification avant d'installer les plug-ins.
+* Pour l'authentification de l'instance SQL Server, vous devez ajouter les informations d'identification après l'installation des plug-ins.
+* Pour l'authentification GMSA, vous devez configurer GMSA lors de l'enregistrement de l'hôte avec SnapCenter dans la page *Ajouter hôte* ou *Modifier hôte* pour activer et utiliser le GMSA.
+* Si l'hôte est ajouté avec GMSA et si GMSA dispose de privilèges d'ouverture de session et d'administration système, GMSA est autorisé à se connecter à l'instance SQL.
++
+** SnapCenter vérifie si l'authentification pour les instances SQL est configurée. Si l'authentification est configurée, l'instance SQL est accessible à l'aide de ces informations d'identification.
+** Si l'authentification n'est pas configurée, utilisez GMSA pour vérifier si le plug-in SQL fonctionne actuellement. Si le plug-in fonctionne, il sera utilisé pour établir une connexion à l'instance SQL.
+** L'instance SQL est accessible via l'authentification des informations d'identification Windows lorsque l'authentification des deux instances SQL n'est pas configurée et que le plug-in n'est pas opérationnel.
+
+
+
+
+[role="tabbed-block"]
+====
+.UI SnapCenter
+--
+.Étapes
+. Dans le volet de navigation de gauche, sélectionnez *Ressources*, puis sélectionnez le plug-in approprié dans la liste.
+. Dans la page Ressources, sélectionnez *base de données* ou *instance* ou *Groupe de disponibilité* dans la liste déroulante *Affichage*.
++
+.. Sélectionnez la base de données, l'instance ou le groupe de disponibilité à sauvegarder.
++
+Lorsque vous effectuez une sauvegarde d'une instance, les informations relatives à l'état de la dernière sauvegarde ou à l'horodatage de cette instance ne seront pas disponibles dans la page des ressources.
+
++
+Dans la vue topologique, vous ne pouvez pas différencier l'état de sauvegarde, l'horodatage ou la sauvegarde d'une instance ou d'une base de données.
+
+
+
+. Dans la page Ressources, cochez la case *custom name format for Snapshot copy*, puis entrez un format de nom personnalisé à utiliser pour le nom de l'instantané.
++
+Par exemple, clienttext_policy_hostname ou Resource_hostname. Par défaut, un horodatage est ajouté au nom du Snapshot.
+
+. Dans la page stratégies, effectuez les tâches suivantes :
++
+.. Dans la section stratégies, sélectionnez une ou plusieurs stratégies dans la liste déroulante.
++
+Vous pouvez créer une stratégie en sélectionnant * * *image:../media/add_policy_from_resourcegroup.gif[""]pour lancer l'assistant de stratégie.
+
++
+Dans la section *configurer les plannings pour les stratégies sélectionnées*, les stratégies sélectionnées sont répertoriées.
+
+.. Sélectionnez * * *image:../media/add_policy_from_resourcegroup.gif[""]dans la colonne configurer les plannings pour la stratégie pour laquelle vous souhaitez configurer un planning.
+.. Dans la boîte de dialogue *Ajouter des plannings pour la stratégie* `policy_name` , configurez le planning, puis sélectionnez *OK*.
++
+Voici `policy_name` le nom de la stratégie que vous avez sélectionnée.
+
++
+Les planifications configurées sont répertoriées dans la colonne *programmes appliqués*.
+
+.. Sélectionnez *utiliser le planificateur Microsoft SQL Server*, puis sélectionnez l'instance du planificateur dans la liste déroulante *instance du planificateur* associée à la stratégie de planification.
+
+
+. Dans la page Vérification, effectuez les opérations suivantes :
++
+.. Sélectionnez le serveur de vérification dans la liste déroulante *serveur de vérification*.
++
+Vous pouvez sélectionner plusieurs serveurs de vérification (hôte local ou hôte distant).
+
++
+
+NOTE: La version du serveur de vérification doit être égale ou supérieure à la version de l'édition du serveur SQL qui héberge la base de données primaire.
+
+.. Sélectionnez *Charger les localisateurs secondaires pour vérifier les sauvegardes sur le système de stockage secondaire* afin de vérifier vos sauvegardes sur le système de stockage secondaire.
+.. Sélectionnez la stratégie pour laquelle vous souhaitez configurer votre planning de vérification, puis sélectionnez * *image:../media/add_policy_from_resourcegroup.gif[""].
+.. Dans la boîte de dialogue Ajouter des programmes de vérification _policy_name_, effectuez les opérations suivantes :
++
+|===
+| Les fonctions que vous recherchez... | Procédez comme ça... 
+
+
+ a| 
+Exécutez la vérification après la sauvegarde
+ a| 
+Sélectionnez *Exécuter la vérification après la sauvegarde*.
+
+
+
+ a| 
+Planifier une vérification
+ a| 
+Sélectionnez *Exécuter la vérification planifiée*.
+
+|===
++
+
+NOTE: Si le serveur de vérification n'a pas de connexion de stockage, l'opération de vérification échoue avec l'erreur : échec du montage du disque.
+
+.. Sélectionnez *OK*.
++
+Les planifications configurées sont répertoriées dans la colonne programmes appliqués.
+
+
+
+. Dans la page notification, dans la liste déroulante Préférences de *E-mail*, sélectionnez les scénarios dans lesquels vous souhaitez envoyer les e-mails.
++
+Vous devez également spécifier les adresses e-mail de l'expéditeur et du destinataire, ainsi que l'objet de l'e-mail. Si vous souhaitez joindre le rapport de l'opération effectuée sur le groupe de ressources, sélectionnez *attacher un rapport de travail*.
+
++
+
+NOTE: Pour la notification par e-mail, vous devez avoir spécifié les détails du serveur SMTP à l'aide de l'interface utilisateur graphique ou de la commande PowerShell set-SmtpServer.
+
+. Passez en revue le résumé, puis sélectionnez *Terminer*.
++
+La page topologie de la base de données s'affiche.
+
+. Sélectionnez *Sauvegarder maintenant*.
+. Dans la page sauvegarde, effectuez les opérations suivantes :
++
+.. Si vous avez appliqué plusieurs stratégies à la ressource, dans la liste déroulante *Stratégie*, sélectionnez la stratégie que vous souhaitez utiliser pour la sauvegarde.
++
+Si la stratégie sélectionnée pour la sauvegarde à la demande est associée à un planning de sauvegarde, les sauvegardes à la demande seront conservées en fonction des paramètres de conservation spécifiés pour le type de programme.
+
+.. Sélectionnez *vérifier après sauvegarde* pour vérifier votre sauvegarde.
+.. Sélectionnez *Backup*.
++
+
+NOTE: Vous ne devez pas renommer la tâche de sauvegarde créée dans le planificateur Windows ou l'agent SQL Server.
+
++
+Si la stratégie sélectionnée pour la sauvegarde à la demande est associée à un planning de sauvegarde, les sauvegardes à la demande seront conservées en fonction des paramètres de conservation spécifiés pour le type de programme.
+
++
+Un groupe de ressources implicite est créé. Vous pouvez afficher ces informations en sélectionnant l'utilisateur ou le groupe concerné dans la page accès utilisateur. Le type de groupe de ressources implicite est « ressource ».
+
+
+
+. Surveillez la progression de l'opération en sélectionnant *Monitor* > *Jobs*.
+
+
+.Une fois que vous avez terminé
+* Dans les configurations MetroCluster, il est possible que SnapCenter ne détecte pas une relation de protection après un basculement.
++
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/Unable_to_detect_SnapMirror_or_SnapVault_relationship_after_MetroCluster_failover["Impossible de détecter la relation SnapMirror ou SnapVault après le basculement de MetroCluster"]
+
+* Si vous sauvegardez des données d'application sur des disques VMDK et que la taille du segment de mémoire Java du plug-in SnapCenter pour VMware vSphere n'est pas suffisamment importante, la sauvegarde risque d'échouer. Pour augmenter la taille du segment de mémoire Java, localisez le fichier de script /opt/netapp/init_scripts/scvservice. Dans ce script, la `do_start method` commande démarre le service de plug-in SnapCenter VMware. Mettez à jour cette commande comme suit : `Java -jar -Xmx8192M -Xms4096M`.
+
+
+.Informations associées
+link:task_create_backup_policies_for_sql_server_databases.html["Créer des stratégies de sauvegarde pour les bases de données SQL Server"]
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/Clone_operation_might_fail_or_take_longer_time_to_complete_with_default_TCP_TIMEOUT_value["Les opérations de sauvegarde échouent avec l'erreur de connexion MySQL en raison du délai dans TCP_TIMEOUT"]
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/Backup_fails_with_Windows_scheduler_error["La sauvegarde échoue en raison d'une erreur du planificateur Windows"]
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/Quiesce_or_grouping_resources_operations_fail["Les opérations de mise en attente ou de regroupement des ressources échouent"]
+
+--
+.Applets de commande PowerShell
+--
+.Étapes
+. Lancez une session de connexion avec le serveur SnapCenter pour un utilisateur spécifié à l'aide de l'applet de commande Open-SmConnection.
++
+[listing]
+----
+Open-smconnection  -SMSbaseurl  https://snapctr.demo.netapp.com:8146
+----
++
+L'invite du nom d'utilisateur et du mot de passe s'affiche.
+
+. Créez une stratégie de sauvegarde à l'aide de l'applet de commande Add-SmPolicy.
++
+Cet exemple crée une nouvelle stratégie de sauvegarde avec un type de sauvegarde SQL fullbackup :
+
++
+[listing]
+----
+PS C:\> Add-SmPolicy -PolicyName TESTPolicy
+-PluginPolicyType SCSQL -PolicyType Backup
+-SqlBackupType FullBackup -Verbose
+----
++
+Cet exemple crée une nouvelle stratégie de sauvegarde avec un type de sauvegarde de système de fichiers Windows de CrashConsistent :
+
++
+[listing]
+----
+PS C:\> Add-SmPolicy -PolicyName FileSystemBackupPolicy
+-PluginPolicyType SCW -PolicyType Backup
+-ScwBackupType CrashConsistent -Verbose
+----
+. Découvrez les ressources hôte à l'aide de l'applet de commande Get-SmResources.
++
+Cet exemple recherche les ressources du plug-in Microsoft SQL sur l'hôte spécifié :
+
++
+[listing]
+----
+C:\PS>PS C:\> Get-SmResources -HostName vise-f6.sddev.mycompany.com
+-PluginCode SCSQL
+----
++
+Cet exemple détecte les ressources des systèmes de fichiers Windows sur l'hôte spécifié :
+
++
+[listing]
+----
+C:\PS>PS C:\> Get-SmResources -HostName vise2-f6.sddev.mycompany.com
+-PluginCode SCW
+----
+. Ajoutez un nouveau groupe de ressources à SnapCenter à l'aide de l'applet de commande Add-SmResourceGroup.
++
+Cet exemple crée un nouveau groupe de ressources de sauvegarde de base de données SQL avec la stratégie et les ressources spécifiées :
+
++
+[listing]
+----
+PS C:\> Add-SmResourceGroup -ResourceGroupName AccountingResource
+-Resources @{"Host"="visef6.org.com";
+"Type"="SQL Database";"Names"="vise-f6\PayrollDatabase"}
+-Policies "BackupPolicy"
+----
++
+Cet exemple crée un nouveau groupe de ressources de sauvegarde du système de fichiers Windows avec la stratégie et les ressources spécifiées :
+
++
+[listing]
+----
+PS C:\> Add-SmResourceGroup -ResourceGroupName EngineeringResource
+-PluginCode SCW -Resources @{"Host"="WIN-VOK20IKID5I";
+"Type"="Windows Filesystem";"Names"="E:\"}
+-Policies "EngineeringBackupPolicy"
+----
+. Lancez une nouvelle tâche de sauvegarde à l'aide de la cmdlet New-SmBackup.
++
+[listing]
+----
+PS C:> New-SmBackup -ResourceGroupName PayrollDataset -Policy FinancePolicy
+----
+. Affichez l'état de la tâche de sauvegarde à l'aide de l'applet de commande Get-SmBackupReport.
++
+Cet exemple affiche un rapport récapitulatif de tous les travaux exécutés à la date spécifiée :
+
++
+[listing]
+----
+PS C:\> Get-SmJobSummaryReport -Date '1/27/2016'
+----
+
+
+Les informations relatives aux paramètres pouvant être utilisés avec la cmdlet et leurs descriptions peuvent être obtenues en exécutant _get-Help nom_commande_. Vous pouvez également vous reporter à la https://docs.netapp.com/us-en/snapcenter-cmdlets/index.html["Guide de référence de l'applet de commande du logiciel SnapCenter"^].
+
+--
+====

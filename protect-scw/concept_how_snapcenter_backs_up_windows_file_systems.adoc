@@ -1,0 +1,23 @@
+---
+permalink: protect-scw/concept_how_snapcenter_backs_up_windows_file_systems.html 
+sidebar: sidebar 
+keywords: SnapCenter 
+summary: 'SnapCenter utilise la technologie Snapshot pour sauvegarder les ressources du système de fichiers Windows qui résident sur des LUN, des CSV (volumes partagés de clusters), des volumes RDM (mappage de périphériques bruts), ALM (mappage de LUN asymétrique) dans des clusters Windows et des VMDK basés sur VMFS/NFS (VMware Virtual machine File System utilisant NFS).' 
+---
+= Sauvegarde des systèmes de fichiers Windows par SnapCenter
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapCenter utilise la technologie Snapshot pour sauvegarder les ressources du système de fichiers Windows qui résident sur des LUN, des CSV (volumes partagés de clusters), des volumes RDM (mappage de périphériques bruts), ALM (mappage de LUN asymétrique) dans des clusters Windows et des VMDK basés sur VMFS/NFS (VMware Virtual machine File System utilisant NFS).
+
+SnapCenter crée des sauvegardes en créant des snapshots des systèmes de fichiers. Les sauvegardes fédérées, dans lesquelles un volume contient des LUN provenant de plusieurs hôtes, sont plus rapides et plus efficaces que les sauvegardes de chaque LUN, car une seule copie Snapshot du volume est créée par rapport aux snapshots individuels de chaque système de fichiers.
+
+Lorsque SnapCenter crée une copie Snapshot, l'intégralité du volume du système de stockage est capturée dans la copie Snapshot. Cependant, la sauvegarde n'est valide que pour le serveur hôte pour lequel la sauvegarde a été créée.
+
+Si les données d'autres serveurs hôtes résident sur le même volume, elles ne peuvent pas être restaurées à partir du Snapshot.
+
+
+NOTE: Si un système de fichiers Windows contient une base de données, la sauvegarde du système de fichiers n'est pas la même que la sauvegarde de la base de données. Pour sauvegarder une base de données, vous devez utiliser l'un des plug-ins de base de données.

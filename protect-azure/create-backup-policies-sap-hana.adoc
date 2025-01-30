@@ -1,0 +1,36 @@
+---
+permalink: protect-azure/create-backup-policies-sap-hana.html 
+sidebar: sidebar 
+keywords: create policies, SAP HANA, backup policies 
+summary: Créez une stratégie de sauvegarde pour le groupe de ressources ou de ressources que vous souhaitez sauvegarder. 
+---
+= Créez des règles de sauvegarde pour les bases de données SAP HANA
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant d'utiliser SnapCenter pour sauvegarder les ressources de base de données SAP HANA, vous devez créer une règle de sauvegarde pour la ressource ou le groupe de ressources à sauvegarder.
+
+.Étapes
+. Dans le volet de navigation de gauche, cliquez sur *Paramètres*.
+. Dans la page Paramètres, cliquez sur *stratégies*.
+. Cliquez sur *Nouveau*.
+. Dans la page Nom, entrez le nom et la description de la stratégie.
+. Dans la page Type de stratégie, effectuez les opérations suivantes :
++
+.. Sélectionnez *Azure NetApp Files* comme type de stockage.
+.. Sélectionnez *basé sur un fichier* si vous souhaitez effectuer un contrôle d'intégrité de la base de données.
+.. Sélectionnez *snapshot based* si vous souhaitez créer une sauvegarde à l'aide de la technologie Snapshot.
+
+
+. Dans la page instantané et sauvegarde, effectuez les opérations suivantes :
++
+.. Sélectionnez la fréquence de la sauvegarde planifiée.
+.. Spécifiez les paramètres de rétention.
+.. Si vous souhaitez activer la sauvegarde Azure NetApp Files, sélectionnez *Activer la sauvegarde* et spécifiez les paramètres de rétention.
+
+
+. Vérifiez le résumé et cliquez sur *Terminer*.
+

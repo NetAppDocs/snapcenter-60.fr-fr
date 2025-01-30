@@ -1,0 +1,29 @@
+---
+permalink: protect-scw/task_install_on_multiple_remote_hosts_using_powershell_cmdlets.html 
+sidebar: sidebar 
+keywords: install, snapcenter 
+summary: 'Si vous souhaitez installer le plug-in SnapCenter pour Microsoft Windows sur plusieurs hôtes à la fois, vous pouvez le faire à l"aide de l"applet de commande Install-SmHostPackage PowerShell.' 
+---
+= Installation du plug-in SnapCenter pour Microsoft Windows sur plusieurs hôtes distants à l'aide d'applets de commande PowerShell
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous souhaitez installer le plug-in SnapCenter pour Microsoft Windows sur plusieurs hôtes à la fois, vous pouvez le faire à l'aide de l' `Install-SmHostPackage` applet de commande PowerShell.
+
+Vous devez vous connecter à SnapCenter en tant qu'utilisateur de domaine disposant des droits d'administrateur local sur chaque hôte sur lequel vous souhaitez installer les plug-ins.
+
+.Étapes
+. Lancer PowerShell.
+. Sur l'hôte du serveur SnapCenter, établissez une session à l'aide de l' `Open-SmConnection` applet de commande, puis entrez vos informations d'identification.
+. Ajoutez l'hôte autonome ou le cluster à SnapCenter à l'aide de `Add-SmHost` l'applet de commande et des paramètres requis.
++
+Les informations relatives aux paramètres pouvant être utilisés avec la cmdlet et leurs descriptions peuvent être obtenues en exécutant _get-Help nom_commande_. Vous pouvez également vous reporter à la https://docs.netapp.com/us-en/snapcenter-cmdlets/index.html["Guide de référence de l'applet de commande du logiciel SnapCenter"^].
+
+. Installez le plug-in sur plusieurs hôtes à l'aide de `Install-SmHostPackage` l'applet de commande et des paramètres requis.
++
+Vous pouvez utiliser `-skipprecheck` l'option lorsque vous avez installé les plug-ins manuellement et que vous ne souhaitez pas vérifier si l'hôte répond aux exigences requises pour installer le plug-in.
+
+
