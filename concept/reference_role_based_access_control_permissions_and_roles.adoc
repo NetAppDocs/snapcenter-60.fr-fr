@@ -63,10 +63,6 @@ SnapCenter offre les autorisations suivantes :
 * Tableau de bord
 * Rapports
 * Restaurer
-+
-** Restauration du volume complet (uniquement pour les plug-ins personnalisés)
-
-
 * Ressource
 +
 Les privilèges de plug-in sont requis de la part de l'administrateur pour que les non-administrateurs puissent effectuer une opération de découverte des ressources.

@@ -50,13 +50,7 @@ SnapCenter inclut les fonctionnalités clés suivantes :
 
 * Protection des données centralisée et cohérente avec les applications
 +
-La protection des données est prise en charge pour les bases de données Microsoft Exchange Server, Microsoft SQL Server, Oracle sous Linux ou AIX, SAP HANA Database, IBM DB2, PostgreSQL, MySQL et Windows Host Filesystem exécutées sur des systèmes ONTAP.
-
-+
-La protection des données est également prise en charge pour d'autres applications et bases de données standard ou personnalisées grâce à une structure permettant de créer des plug-ins SnapCenter définis par l'utilisateur. La protection des données est ainsi assurée pour d'autres applications et bases de données depuis une seule fenêtre. En tirant parti de cette structure, NetApp a publié des plug-ins SnapCenter pour MongoDB, Storage, MaxDB, Sybase ASE, ORASCPM. En plus de cela, vous pouvez créer votre propre plug-in à l'aide du guide du développeur.
-
-+
-link:../protect-scc/develop_a_plug_in_for_your_application.html["Développez un plug-in pour votre application"]
+La protection des données est prise en charge pour les bases de données Microsoft Exchange Server, Microsoft SQL Server, Oracle sous Linux ou AIX, SAP HANA Database, IBM DB2, PostgreSQL, MySQL et Windows Host Filesystem exécutées sur des systèmes ONTAP. SnapCenter prend également en charge la protection d'applications telles que MongoDB, Storage, MaxDB, Sybase ASE et ORASCPM.
 
 * Sauvegardes basées sur des règles
 +
@@ -220,7 +214,7 @@ SnapCenter Server prend en charge Microsoft Windows et Linux (RHEL 8.x, RHEL 9.x
 Si vous utilisez le module de plug-ins SnapCenter pour Linux ou le module de plug-ins SnapCenter pour AIX, les planifications sont exécutées de manière centralisée à l'aide du planificateur Quartz.
 
 * Pour le plug-in SnapCenter pour la base de données Oracle, l'agent hôte qui s'exécute sur l'hôte SnapCenter Server communique avec le chargeur de plug-in SnapCenter (SPL) qui s'exécute sur l'hôte Linux ou AIX afin d'effectuer différentes opérations de protection des données.
-* Pour le plug-in SnapCenter pour base de données SAP HANA et plug-ins personnalisés SnapCenter, le serveur SnapCenter communique avec ces plug-ins via l'agent SCCore qui s'exécute sur l'hôte.
+* Pour le plug-in SnapCenter pour la base de données SAP HANA, le serveur SnapCenter communique avec le plug-in via l'agent SCCore qui s'exécute sur l'hôte.
 
 
 Le serveur SnapCenter et les plug-ins communiquent avec l'agent hôte via HTTPS. Les informations relatives aux opérations SnapCenter sont stockées dans le référentiel SnapCenter.
@@ -306,19 +300,6 @@ Module de plug-ins pour Linux et module de plug-ins pour Windows
 Plug-in pour UNIX ou plug-in pour Windows
  a| 
 Hôte client HDBSQL
- a| 
-Linux ou Windows
-
-
-
- a| 
-Plug-ins personnalisés
- a| 
-Module de plug-ins pour Linux et module de plug-ins pour Windows
- a| 
-Pour les sauvegardes de système de fichiers, Plug-in pour Windows
- a| 
-Hôte d'application personnalisé
  a| 
 Linux ou Windows
 
@@ -500,7 +481,7 @@ MongoDB, ORASCPM (applications Oracle), SAP ASE, SAP MaxDB et le plug-in de stoc
 
 * Prise en charge d'autres plug-ins pour la gestion d'applications et de bases de données qui ne sont pas pris en charge par d'autres plug-ins SnapCenter Les plug-ins pris en charge par NetApp ne sont pas fournis lors de l'installation de SnapCenter.
 * Prise en charge de la création de copies en miroir des jeux de sauvegarde sur un autre volume et de la réplication de sauvegarde disque à disque.
-* Prise en charge des environnements Windows et Linux. Dans les environnements Windows, les applications personnalisées via des plug-ins personnalisés peuvent, en option, utiliser le plug-in SnapCenter pour Microsoft Windows pour créer des sauvegardes cohérentes avec le système de fichiers.
+* Prise en charge des environnements Windows et Linux.
 
 
 
