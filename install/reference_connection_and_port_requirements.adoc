@@ -37,7 +37,7 @@ Le tableau ci-dessous répertorie les différents ports et leurs valeurs par dé
 
 
  a| 
-Port SnapCenter
+Port Web SnapCenter
  a| 
 8146 (HTTPS), bidirectionnel, personnalisable, comme dans l'URL _\https://server:8146_
 
